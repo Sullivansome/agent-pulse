@@ -968,7 +968,7 @@ pub fn export(path: &std::path::Path) -> anyhow::Result<()> {
     for (name, w, h, sessions, ui) in states {
         let frame = renderer.frame(w, h, 2.0, &sessions, &ui, 100_000);
         let mut rgba = frame.pixels;
-        for pixel in rgba.chunks_exact_mut(4) {
+        for pixel in rgba.as_chunks_mut::<4>().0.iter_mut() {
             pixel.swap(0, 2);
         }
         image::save_buffer(

@@ -81,7 +81,13 @@ pub fn rasterize(text: &str, size: f32, width: f32, emphasized: bool) -> Rc<Mask
         let mask = Rc::new(Mask {
             width: w,
             height: h,
-            alpha: context.data().chunks_exact(4).map(|p| p[3]).collect(),
+            alpha: context
+                .data()
+                .as_chunks::<4>()
+                .0
+                .iter()
+                .map(|p| p[3])
+                .collect(),
         });
         let mut cache = cache.borrow_mut();
         if cache.len() >= 256 {
