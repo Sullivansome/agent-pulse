@@ -1,0 +1,12 @@
+/target
+/dist
+.DS_Store
+**/node_modules/
+**/.astro/
+**/.wrangler/
+**/test-results/
+**/playwright-report/
+.env
+.env.*
+!.env.example
+.dev.vars*

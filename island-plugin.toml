@@ -1,0 +1,27 @@
+api_version = 2
+
+[plugin]
+id = "com.sullivansome.agent-pulse"
+name = "Agent Pulse"
+version = "0.1.0"
+description = "Claude Code, Codex, and Grok session status at a glance. Local lifecycle hooks; no transcript collection."
+authors = ["Island"]
+license = "MIT"
+homepage = "https://github.com/Sullivansome/agent-pulse"
+repository = "https://github.com/Sullivansome/agent-pulse"
+
+[entry]
+kind = "ipc"
+command = "island-plugin-agent-pulse"
+
+[view]
+expanded = "custom"
+collapsed = "metadata"
+preferred_expanded = { w = 340, h = 88 }
+
+[permissions]
+grant = ["present", "present.sticky", "surface.framebuffer", "shell:open-url"]
+
+[market]
+platforms = ["macos", "linux"]
+categories = ["Developer tools", "Agents"]

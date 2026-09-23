@@ -1,0 +1,43 @@
+[package]
+name = "island-plugin-agent-pulse"
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+repository = "https://github.com/Sullivansome/agent-pulse"
+readme = "README.md"
+description = "Local lifecycle monitoring for Claude Code, Codex CLI, and Grok"
+publish = false
+
+[lints.rust]
+# objc 0.2 expands this legacy feature check at its callers; keep other cfg checks enabled.
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(feature, values("cargo-clippy"))'] }
+
+[dependencies]
+island-plugin-sdk = { git = "https://github.com/Sullivansome/island-plugin-sdk", rev = "e18d19453776712aef5e7486b3302b7072f75739" }
+island-plugin-api = { git = "https://github.com/Sullivansome/island-plugin-sdk", rev = "e18d19453776712aef5e7486b3302b7072f75739" }
+island-design = { git = "https://github.com/Sullivansome/island-plugin-sdk", rev = "e18d19453776712aef5e7486b3302b7072f75739" }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha2 = "0.10"
+anyhow = "1"
+clap = { version = "4", features = ["derive"] }
+tempfile = "3"
+fontdue = "0.9"
+image = { version = "0.25", default-features = false, features = ["png"] }
+
+[target.'cfg(target_os = "macos")'.dependencies]
+core-text = "21"
+core-graphics = "0.24"
+core-foundation = "0.10"
+objc = "0.2"
+
+[target.'cfg(unix)'.dependencies]
+libc = "0.2"
+
+# This repository builds independently, including when checked out inside another workspace.
+[workspace]
+
+[profile.release]
+lto = true
+codegen-units = 1
+strip = true
